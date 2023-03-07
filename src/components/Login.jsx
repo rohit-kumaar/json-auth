@@ -4,41 +4,23 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 function Login() {
+  const USERS = `http://localhost:4000/users`;
   const navigate = useNavigate();
 
-  const postData = (values) => {
-    console.log(values.email, values.password);
+  const postData = async (values) => {
+    const res = await fetch(USERS);
+    const user = await res.json();
+    const result = user.filter(
+      (user) => user.email === values.email && user.password === values.password
+    );
 
-    if (true) {
-      ///implentation
-      // console.log('proceed');
-      fetch(
-        "http://localhost:4000/users?" +
-          `email=${values.email}&password=${values.password}`
-      )
-        .then((res) => {
-          navigate("/profile");
-          // console.log("Rohit", res);
-          // return res.json();
-        })
-        // .then((resp) => {
-        //   console.log("Rohit", resp);
-        //   if (Object.keys(resp).length === 0) {
-        //     alert("Please Enter valid username");
-        //   } else {
-        //     if (resp.password === values.password) {
-        //       alert("Success");
-        //       // sessionStorage.setItem("username", username);
-        //       // sessionStorage.setItem("userrole", resp.role);
-        //       navigate("/profile");
-        //     } else {
-        //       alert("Please Enter valid credentials");
-        //     }
-        //   }
-        // })
-        .catch((err) => {
-          alert("Login Failed due to :" + err.message);
-        });
+    if (result.length === 0) alert("Please Registration First");
+
+    if (
+      result[0].email === values.email &&
+      result[0].password === values.password
+    ) {
+      navigate("/profile");
     }
   };
 
