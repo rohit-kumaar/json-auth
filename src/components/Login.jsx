@@ -21,7 +21,7 @@ function Login() {
       result[0].password === values.password
     ) {
       navigate("/profile");
-      sessionStorage.setItem('username', result[0].name);
+      sessionStorage.setItem("username", result[0].name);
     }
   };
 
@@ -77,7 +77,7 @@ function Login() {
                 Login
               </button>
 
-              <Link to="/" className="align-self-end">
+              <Link to="/registration" className="align-self-end">
                 New Registration
               </Link>
             </div>

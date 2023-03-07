@@ -10,7 +10,7 @@ function Registration() {
   const postData = (values) => {
     newUser(values).then((res) => {
       alert("Registration successfully done");
-      navigate("/login");
+      navigate("/");
     });
   };
 
@@ -78,7 +78,7 @@ function Registration() {
                 Submit
               </button>
 
-              <Link to="/login" className="align-self-end">
+              <Link to="/" className="align-self-end">
                 Already Register
               </Link>
             </div>
