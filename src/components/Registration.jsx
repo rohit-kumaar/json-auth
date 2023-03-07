@@ -1,5 +1,5 @@
 import React from "react";
-import { addEmployees } from "../services/employeesService";
+import { newUser } from "../services/userServices";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -8,7 +8,7 @@ function Registration() {
   const navigate = useNavigate();
 
   const postData = (values) => {
-    addEmployees(values).then((res) => {
+    newUser(values).then((res) => {
       alert("Registration successfully done");
       navigate("/login");
     });
@@ -34,7 +34,7 @@ function Registration() {
         onSubmit={(values) => postData(values)}
       >
         <Form className="mt-5 ">
-          <div className="container w-50">
+          <div className="container">
             <h1 className="text-center mb-4">Registration</h1>
 
             <div className="row">

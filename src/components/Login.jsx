@@ -8,6 +8,38 @@ function Login() {
 
   const postData = (values) => {
     console.log(values.email, values.password);
+
+    if (true) {
+      ///implentation
+      // console.log('proceed');
+      fetch(
+        "http://localhost:4000/users?" +
+          `email=${values.email}&password=${values.password}`
+      )
+        .then((res) => {
+          navigate("/profile");
+          // console.log("Rohit", res);
+          // return res.json();
+        })
+        // .then((resp) => {
+        //   console.log("Rohit", resp);
+        //   if (Object.keys(resp).length === 0) {
+        //     alert("Please Enter valid username");
+        //   } else {
+        //     if (resp.password === values.password) {
+        //       alert("Success");
+        //       // sessionStorage.setItem("username", username);
+        //       // sessionStorage.setItem("userrole", resp.role);
+        //       navigate("/profile");
+        //     } else {
+        //       alert("Please Enter valid credentials");
+        //     }
+        //   }
+        // })
+        .catch((err) => {
+          alert("Login Failed due to :" + err.message);
+        });
+    }
   };
 
   const validationSchema = Yup.object({
@@ -28,13 +60,13 @@ function Login() {
         onSubmit={(values) => postData(values)}
       >
         <Form className="mt-5">
-          <div className="container w-50">
+          <div className="container">
             <h1 className="text-center">Login</h1>
 
             <div className="row">
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
-                  <b>Employee email</b>
+                  <b>Email ID</b>
                 </label>
                 <Field type="email" className="form-control" name="email" />
                 <div className="text-danger">
@@ -44,7 +76,7 @@ function Login() {
 
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
-                  <b>Employee password</b>
+                  <b>Password</b>
                 </label>
                 <Field
                   type="password"
